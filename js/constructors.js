@@ -1,0 +1,214 @@
+// Here are constructors for all objects
+
+//This array stores all IP addresses of Network compeonents created
+completeIPstore = [];
+//this array stores the range of IP addresses
+//alert(ipRange);
+//This array stores the list of port numbers and their associated services
+let ports = {ftp: 21, ssh:22, telnet: 23, smtp: 25, dns: 53, http: 43, pop3: 110, rpc: 135, sql: 1434, netbios: 137};
+//Helper contains all methods that give the user global game help. Tool specific help is maintained within the tool classes
+class Helper{
+    constructor(){
+    }
+    getHelpMain(){
+        let outputText = document.getElementById("lessonText");
+        outputText.innerHTML = "";   
+        outputText.innerHTML += "<li><h3>Commands:</h3><li>"
+                             + "<li><b>'help'</b> : Bring up the command list.</li>"
+                             + "<li><b>'clear'</b> : Clear text from the terminal window.</li>"
+                             + "<li><b>'next'</b> : Continue to next instruction.</li>"
+                             + "<li><b>'back'</b>: Return to previous instruction.</li>"
+                             + "<li><b>'ports'</b>: Show a list of port numbers and their associated services.</li>"
+                             + "<li><b>'notes'</b>: Bring up a log of results you have discovered so far. Example: <b>notes fping</b></li>";                            
+    }
+    portsList(){
+        let outputText = document.getElementById("lessonText");
+        outputText.innerHTML = "";   
+        outputText.innerHTML += "<li><h3>Port Numbers:</h3><li>"
+                             + "<li><b>FTP (File Transfer Protocol)</b> : TCP port 21</li>"
+                             + "<li><b>SSH (Secure Shell)</b> : TCP port 22</li>"
+                             + "<li><b>Telnet</b> : TCP port 23</li>"
+                             + "<li><b>SMTP (Simple Mail Transfer Protocol)</b>: TCP port 25</li>"
+                             + "<li><b>HTTP (Hypertext Transport Protocol)</b>: TCP port 443</li>"
+                             + "<li><b>POP3 (Post Office Protocol version 3)</b>: TCP port 110</li>"
+                             + "<li><b>Windows RPC</b>: TCP and UDP ports 137–139</li>"
+                             + "<li><b>Microsoft SQL Server</b>: TCP port 1433 and UDP port 1434</li>";                            
+    }
+    toolList(){
+        let outputText = document.getElementById("testOutput");   
+        outputText.innerHTML = "";
+        for(let i=0; i<tools.length; i++){
+            outputText.innerHTML += "<li>" + tools[i]; + "</li>";
+        }
+    }
+    notesList(tool){
+        if (tool == 'fping' && fpingTool.state === true){
+            let outputText = document.getElementById("lessonText");
+            outputText.innerHTML = "";
+            outputText.innerHTML = "<li>fping found the following IP addressses:</li>"
+            for(let i=0; i<completeIPstore.length; i++){
+                outputText.innerHTML += "<li>" + JSON.stringify(completeIPstore[i]); + "</li>";
+            }
+        }
+        else if(tool == 'nmap' && nmapTool.state === true){
+            let outputText = document.getElementById("lessonText");
+            outputText.innerHTML = "";
+            outputText.innerHTML = "All open ports.......\n\n\n";
+            for(let i=0; i<server.length; i++){
+                if(ip == server[i].ipAdd){
+                    outputText.innerHTML += "<li>" + JSON.stringify(server[i].ipAdd) + "  ---  Ports: " + JSON.stringify(server[i].port); + "</li>";
+                }
+            }
+        }
+        else {
+            let outputText = document.getElementById("lessonText");
+            outputText.innerHTML = "";
+            outputText.innerHTML += "<li><h2>Logs:</h2><li>"
+                                 + "<li>No logs found.....</li>";
+        }
+    }
+}
+//Feedback contains all methods that give the user feedback reponses.
+class Feedback{
+    constructor(){}
+    inputInvalid(){
+        let outputText = document.getElementById("testOutput");   
+        outputText.innerHTML = "";
+        outputText.innerHTML += "<li>Input not recognised.....<li>"
+                             + "<li></li>"
+                             + "<li>type 'help' for available commands</li>";
+    }
+}
+//ActionPoints class handles the game score and attributes
+class ActionPoints{
+    constructor(ap){
+        this.currentAP = ap;
+    }
+    getAP(){
+        return this.currentAP;
+    }
+    addAP(updateAP){
+        this.currentAP = this.currentAP + updateAP;
+    }
+    subAP(updateAP){
+        this.currentAP = this.currentAP - updateAP;
+        console.log(this.currentAP);
+        console.log(updateAP);
+        if(this.currentAP <= 0){
+            this.lostAP();
+        }
+    }
+    printAP(){
+        let outputText = document.getElementById("testOutput");   
+        outputText.innerHTML = "";
+        outputText.innerHTML += "<li>Remaining Action Points:<li>"
+                             + "<li>" + this.currentAP +  "</li>";
+    }
+    lostAP(){
+        let outputText = document.getElementById("testOutput");   
+        outputText.innerHTML = "";
+        outputText.innerHTML += "<li>.......access blocked<li>"
+                             + "<li>......tracing route</li>"
+                             + "<li>....knock knock</li>"
+                             + "<li>Game Over</li>";
+    }
+}
+//----------------------------------------Network component objects-----------------------------------------
+class Server{
+    constructor(type, ipAdd, port=0) {
+        this.type = type;
+        this.ipAdd = ipAdd;
+        this.port = port;
+        this.contents;
+    }
+    getIP(){
+        return(this.ipAdd);
+    }
+}
+class Computer{
+    constructor(userName, password, ipAdd) {
+        this.username = userName;
+        this.password = password;
+        this.ipAdd = ipAdd;
+    }
+}
+
+class Router{}
+
+class Firewall{}
+
+class WirelessAP{}
+//--------------------------------------------Hacking tool objects----------------------------------------
+//The NMAP tool. Modelled to return IP addresses, Ports, Names ect.
+class Nmap {
+    constructor(name, state){
+        this.name = name;
+        this.state = state;
+        this.updateAP = 1;
+    }
+    getName(){
+        return this.name;
+    }
+    //has the user ran the nmap tool to retrieve ip addresses
+    getState(){
+        return this.state;
+    }
+    //give the user information on the nmap tool and usage
+    getToolDescription(){    
+        let outputText = document.getElementById("testOutput");   
+        outputText.innerHTML = "";
+        outputText.innerHTML += "<li>NMAP</li>"
+                              + "<li>This tool returns the IP addresses of network components</li>"
+                              + "<li>Cost: 1 Action Point</li>"
+                              + "<li>Strengths: Low cost tool to retrieve all IP addresses on network</li>"
+                              + "<li>Weaknesses: Chance to fail if the network has more than 1 Firewall</li>"
+                              + "<li>Tip: Once nmap has retrieved the ip address list.</li>"
+                              + "<li>To get more details of each discovered component:</li>"
+                              + "<li>nmap ip</li>";
+    }
+    //give the user more detailed information on network components
+    nmapBasic(ip){
+        nmapTool.state = true;
+        let outputText = document.getElementById("toolOutput");
+        outputText.innerHTML = "";
+        outputText.innerHTML = "All open ports.......\n\n\n";
+        for(let i=0; i<server.length; i++){
+            if(ip == server[i].ipAdd){
+                outputText.innerHTML += "<li>" + JSON.stringify(server[i].ipAdd) + "  ---  Ports: " + JSON.stringify(server[i].port); + "</li>";
+            }
+        }
+        //update action points
+        this.nmapAP();
+    }
+    nmapAP(){
+        actionPoints.subAP(this.updateAP);
+    }
+}
+class Fping{
+    constructor(name, state){
+        this.name = name;
+        this.state = state;
+        this.updateAP = 1;
+    }
+    getIpList(){
+        this.state = true;
+        let outputText = document.getElementById("toolOutput");
+        outputText.innerHTML = "";
+        outputText.innerHTML = "<li>fping got responses from the following machines at:</li>"
+        for(let i=0; i<completeIPstore.length; i++){
+            outputText.innerHTML += "<li>" + JSON.stringify(completeIPstore[i]); + "</li>";
+        }
+    }
+}
+
+
+
+
+
+
+/*
+getServerDetails(){
+    server.forEach(server => console.log(server));
+    for(let i=0; i<server.length; i++){
+        document.getElementById("testOutput").innerHTML = JSON.stringify(server, null, 2);
+*/

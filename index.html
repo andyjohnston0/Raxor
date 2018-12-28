@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Raxor - Cybersecurity Game</title>
+
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link rel="stylesheet" type="text/css" href="styles.css">
+
+    <script src="js\constructors.js"></script>
+    <script src="js\scenarios.js"></script>
+    <script src="js\objectFactory.js"></script>
+    <script src="js\eventHandling.js"></script>
+    <script src="node_modules\termly.js\dist\termly-prompt.min.js"></script>
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+</head>
+<!----onload calls the javascript function to enable the enter function on the form -->
+<body>
+    <nav>
+    <!-- navbar source https://www.youtube.com/watch?v=gXkqy0b4M5g&t=1797s -->
+        <div class="logo">
+            <h4>Raxor-Cybersecurity Game</h4>
+        </div>
+        <ul class="nav-links">
+    <!--    <li><a href="#">Sign in</a></li>
+            <li><a href="#">Register</a></li> -->
+            <li><a href="#">About</a></li>
+        </ul>
+    </nav> 
+    <div id="container" data-lpignore=true autofocus spellcheck="false">
+        <div class="topSection">
+            <script>
+                var shell = new TermlyPrompt('.topSection', { commands:customCommands })
+            </script>
+        </div>
+        <div class="leftSection">
+            <div id="lesson">
+                <ul id="lessonText">
+                </ul>
+            </div>
+        </div>
+        <div class="middleSection">
+            <div id="feedback">
+                <ul id="testOutput">
+                    <li><H3>Welcome to RaXoR</H3></li>
+                    <li>Here you will learn the basic tools and principles of penetration testing and cybersecurity.</li>
+                    <li>A new simulated network environment is initialised by <span id = "light">RaXoR</span> each time you play.</li>
+                    <li>You will be introduced to penetration testing tools in a safe and simplified way through various scenarios.</li>
+                    <li>At the end of each scenario, you will be given challenges to perform on the simulated network.</li>
+                    <li>This is a safe environment to learn.</li>
+                    <li>Type <span id ='light'>'start'</span> in the command terminal to begin...</li>
+                </ul>
+            </div>
+        </div>
+        <div class="rightSection">
+            <div id="output">
+                <ul id="toolOutput">
+                </ul>
+        </div></div>
+    </div>
+</body>
+</html>
+
+
+
+<!--First steps:
+Input from user is read and id you type 'scan' you get back the ip address of the server
+    -Simple stuff but get the basic paths down and and more complexity can be introduced
+    -Keep it modular asa much as possible
+    -Everything here works
+-->
+
+<!--To Do List:
+    - clean/parse user input + work on a terminal input design
+    - Work out some more objects to implement and how message passing can be simulatied
+    - Ports that are used for different functions can give examples of server types
+    - get the object factory to create a desired number of objects for the game.
+    - narrative feedback for player.
+
+
+
+NEW!!!!!!: YOU ARE GOING TO NEED A GLOBAL JSON OBJECT LIKE 'SERVER' BUT WHICH ALSO COMBINES ALL OTHER STATE KEEPING OBJECTS
+
+--FIX the actionpoint update (nmap)...... its a mess. variable seems to get random values-  done!
+-->

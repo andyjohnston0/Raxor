@@ -1,0 +1,134 @@
+
+@import url(https://fonts.googleapis.com/css?family=VT323);
+
+body, html {
+    width: 100%;
+    height: 100%;
+    margin: 0;
+}
+* {
+    padding: 0px;
+    margin: 0px;
+    box-sizing: border-box;
+}
+nav {
+   display: flex;
+   justify-content: space-around;
+   align-items: center;
+   min-height: 8vh;
+   background-color: #1F2833;
+   font-family: 'Helvetica', Tahoma, Sans-Serif;
+}
+.logo {
+    color: rgb(256, 256, 256);
+    text-transform: uppercase;
+    letter-spacing: 5px;
+    font-size: 20px;
+}
+.nav-links{
+    display: flex;
+    justify-content: space-around;
+    width: 30%;
+}
+.nav-links a{
+    color: rgb(256, 256, 256);
+    text-decoration: none;
+    letter-spacing: 3px;
+    font-weight: bold;
+    font-size: 14px;
+}
+#container {
+    width: 100%;
+    height: 100%;
+    font-family: "VT323", 'Helvetica', Tahoma, Sans-Serif;
+    font-size: 1.2vw;
+    color: rgb(24, 231, 5);
+    background-color: black;
+}
+.terminal-input {
+    font-family: "VT323", 'Times New Roman', Times, serif;
+    font-size: 1.2vw;
+    height: 1cem;
+    outline: 0;
+    border: 0;
+    position: relative;
+    text-align: left;
+    color: rgb(24, 231, 5);
+    background-color: #0B0C10;
+}
+.leftSection {
+    width: 30%;
+    height: 100%;
+    float: left;
+    background-color: rgb(256, 256, 256);
+    border-collapse: collapse;
+    font-family: 'Helvetica', Tahoma, Sans-Serif;
+    letter-spacing: 2px;
+    font-size: 18px;
+    color: black;
+    box-shadow: 0px 2px 30px rgb(16, 12, 11) inset;
+}
+.middleSection {
+    width: 40%;
+    height: 100%;
+    float: left;
+    font-family: 'Helvetica', Tahoma, Sans-Serif;
+    background-color: #1F2833;
+    border-collapse: collapse;
+    letter-spacing: 2px;
+    word-wrap: break-word;
+    font-size: 18px;
+    color: rgb(37, 228, 20);
+    padding: 20px 20px 5px 50px;
+}
+.rightSection {
+    width: 30%;
+    height: 100%;
+    position: relative;
+    float: right;
+    color: rgb(0, 0, 0);
+    font-size: 24px;
+    background-color: #C5C6C7;
+    box-shadow: 0px 2px 30px rgb(16, 12, 11) inset;
+}
+.topSection {
+    width: 100%;
+    height: 300px;
+    overflow-y: auto;
+    border-collapse: collapse;
+    background-color: #0B0C10;
+}
+ul {
+    position: relative;
+    list-style-type: none;
+    margin-left: 0;
+}
+li {
+    margin: 1em;
+}
+h3 {
+    color: rgb(236, 236, 236);
+}
+h4 {
+    color:rgb(236, 236, 236);
+}
+#light {
+    color: rgb(236, 236, 236);
+}
+#dark {
+    color: black;
+}
+
+/*
+@media screen and (max-width:959px){
+    .container{
+        width: 100%;
+    }
+    .input{
+        width: 50%;
+    }
+    .output{
+        width: 50%
+    }
+}
+*/
