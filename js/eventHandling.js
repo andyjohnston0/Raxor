@@ -20,15 +20,20 @@ var customCommands = {
     start: { 
       name: 'start',
       type: 'usr', // OPTIONAL default to 'usr' if not passed
-      fn: function help(ARGV) {
-        scenario1.selector();
+      fn: function start(ARGV) {
+        if(localStorage.getItem("scenario1") === true){
+          scenario1.scenarioComplete()
+        }
+        else{
+          scenario1.selector();
+        }
         return 'ok'
       },
     },
     next: { 
       name: 'next', 
       type: 'usr', // OPTIONAL default to 'usr' if not passed
-      fn: function help(ARGV) {
+      fn: function next(ARGV) {
         scenario1.next();
         return 'ok'
       },
@@ -36,7 +41,7 @@ var customCommands = {
     back: { 
       name: 'back',
       type: 'usr', // OPTIONAL default to 'usr' if not passed
-      fn: function help(ARGV) {
+      fn: function back(ARGV) {
         scenario1.back();
         return 'ok'
       },
@@ -48,12 +53,10 @@ var customCommands = {
         let input = ARGV['_'];
         if(input == ipRange){
           fpingTool.getIpList();
-          if(scenario1.getScenarioPath() == 2){
-            scenario1.fpingSuccess();
-            return 'ok'
-          }
+          scenario1.fpingSuccess();
+          return 'ok'
         }
-        else if(scenario1.getScenarioPath() == 2){
+        else{
           return 'incorrect range..... try again'
         }
       },
@@ -64,7 +67,7 @@ var customCommands = {
       fn: function nmap(ARGV) {
         let input = ARGV['_'];
         for(let i=0; i<server.length; i++){
-          svIp = server[i].ipAdd;
+          let svIp = server[i].ipAdd;
           if(input == svIp){
             nmapTool.nmapBasic(input);
             return 'ok'
@@ -72,10 +75,49 @@ var customCommands = {
         }       
       },
     },
+    telnet: {
+      name: 'telnet',
+      type: 'usr', // OPTIONAL default to 'usr' if not passed
+      fn: function telnet(ARGV) {
+        let input = ARGV['_'];
+        for(let i =0; i<= server.length; i++){
+          if(input == server[i].ipAdd && server[i].port == 23,25){
+            telnetTool.connection(input);
+            return 'telnet connected'
+          }
+          else{
+            return 'cannot connect..... try again'
+          }
+        }
+      }
+    },
+    vrfy: {
+      name: 'vrfy',
+      type: 'usr', // OPTIONAL default to 'usr' if not passed
+      fn: function vrfy(ARGV) {
+        let input = ARGV['_'];
+        for(let i =0; i<= scenarioMail.length; i++){
+          if(input == scenarioMail[i]){
+            if(scenario1.scenarioActive == true){
+              scenario1.scenarioState = true;
+              //remember scenario was completed in local storage
+              localStorage.setItem("scenario1", true);
+              scenario1.next();
+            }
+            telnetTool.smtpVerifySuccess(input);
+            return 'ok'
+          }
+          else{
+            telnetTool.smptVerifyFailure(input);
+            return 'user not found..... try again'
+          }
+        }
+      }
+    },
     ports: { 
       name: 'ports',
       type: 'usr', // OPTIONAL default to 'usr' if not passed
-      fn: function help(ARGV) {
+      fn: function ports(ARGV) {
         helper.portsList();
         return 'ok'
       },
@@ -83,9 +125,18 @@ var customCommands = {
     notes: { 
       name: 'notes',
       type: 'usr', // OPTIONAL default to 'usr' if not passed
-      fn: function help(ARGV) {
+      fn: function notes(ARGV) {
         input = ARGV['_'];
         helper.notesList(input);
+        return 'ok'
+      },
+    },
+    tools: { 
+      name: 'tools',
+      type: 'usr', // OPTIONAL default to 'usr' if not passed
+      fn: function notes(ARGV) {
+        //input = ARGV['_'];
+        helper.toolList();
         return 'ok'
       },
     },

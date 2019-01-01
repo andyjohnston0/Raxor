@@ -46,13 +46,6 @@
         <div class="middleSection">
             <div id="feedback">
                 <ul id="testOutput">
-                    <li><H3>Welcome to RaXoR</H3></li>
-                    <li>Here you will learn the basic tools and principles of penetration testing and cybersecurity.</li>
-                    <li>A new simulated network environment is initialised by <span id = "light">RaXoR</span> each time you play.</li>
-                    <li>You will be introduced to penetration testing tools in a safe and simplified way through various scenarios.</li>
-                    <li>At the end of each scenario, you will be given challenges to perform on the simulated network.</li>
-                    <li>This is a safe environment to learn.</li>
-                    <li>Type <span id ='light'>'start'</span> in the command terminal to begin...</li>
                 </ul>
             </div>
         </div>
@@ -62,28 +55,6 @@
                 </ul>
         </div></div>
     </div>
+    <script> window.onload = scenarioMemory();</script>
 </body>
 </html>
-
-
-
-<!--First steps:
-Input from user is read and id you type 'scan' you get back the ip address of the server
-    -Simple stuff but get the basic paths down and and more complexity can be introduced
-    -Keep it modular asa much as possible
-    -Everything here works
--->
-
-<!--To Do List:
-    - clean/parse user input + work on a terminal input design
-    - Work out some more objects to implement and how message passing can be simulatied
-    - Ports that are used for different functions can give examples of server types
-    - get the object factory to create a desired number of objects for the game.
-    - narrative feedback for player.
-
-
-
-NEW!!!!!!: YOU ARE GOING TO NEED A GLOBAL JSON OBJECT LIKE 'SERVER' BUT WHICH ALSO COMBINES ALL OTHER STATE KEEPING OBJECTS
-
---FIX the actionpoint update (nmap)...... its a mess. variable seems to get random values-  done!
--->

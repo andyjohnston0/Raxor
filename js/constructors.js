@@ -19,7 +19,8 @@ class Helper{
                              + "<li><b>'next'</b> : Continue to next instruction.</li>"
                              + "<li><b>'back'</b>: Return to previous instruction.</li>"
                              + "<li><b>'ports'</b>: Show a list of port numbers and their associated services.</li>"
-                             + "<li><b>'notes'</b>: Bring up a log of results you have discovered so far. Example: <b>notes fping</b></li>";                            
+                             + "<li><b>'notes'</b>: Bring up a log of results you have discovered so far. Example: <b>notes fping</b></li>"
+                             + "<li><b>'tools'</b>: List all tools available to you.</li>";                            
     }
     portsList(){
         let outputText = document.getElementById("lessonText");
@@ -32,11 +33,13 @@ class Helper{
                              + "<li><b>HTTP (Hypertext Transport Protocol)</b>: TCP port 443</li>"
                              + "<li><b>POP3 (Post Office Protocol version 3)</b>: TCP port 110</li>"
                              + "<li><b>Windows RPC</b>: TCP and UDP ports 137–139</li>"
-                             + "<li><b>Microsoft SQL Server</b>: TCP port 1433 and UDP port 1434</li>";                            
+                             + "<li><b>Microsoft SQL Server</b>: TCP port 1433 and UDP port 1434</li>"
+                             + "<li><b>DNS</b>: TCP and UDP port 53</li>";                            
     }
     toolList(){
-        let outputText = document.getElementById("testOutput");   
+        let outputText = document.getElementById("lessonText");   
         outputText.innerHTML = "";
+        outputText.innerHTML += "<li><h3>Penetration Testing Tools:</h3><li>"
         for(let i=0; i<tools.length; i++){
             outputText.innerHTML += "<li>" + tools[i]; + "</li>";
         }
@@ -55,9 +58,7 @@ class Helper{
             outputText.innerHTML = "";
             outputText.innerHTML = "All open ports.......\n\n\n";
             for(let i=0; i<server.length; i++){
-                if(ip == server[i].ipAdd){
-                    outputText.innerHTML += "<li>" + JSON.stringify(server[i].ipAdd) + "  ---  Ports: " + JSON.stringify(server[i].port); + "</li>";
-                }
+                outputText.innerHTML += "<li>" + JSON.stringify(server[i].ipAdd) + "  ---  Ports: " + JSON.stringify(server[i].port); + "</li>";
             }
         }
         else {
@@ -92,8 +93,6 @@ class ActionPoints{
     }
     subAP(updateAP){
         this.currentAP = this.currentAP - updateAP;
-        console.log(this.currentAP);
-        console.log(updateAP);
         if(this.currentAP <= 0){
             this.lostAP();
         }
@@ -115,14 +114,17 @@ class ActionPoints{
 }
 //----------------------------------------Network component objects-----------------------------------------
 class Server{
-    constructor(type, ipAdd, port=0) {
+    constructor(type, ipAdd, port=[0,0,0]) {
         this.type = type;
         this.ipAdd = ipAdd;
         this.port = port;
         this.contents;
     }
     getIP(){
-        return(this.ipAdd);
+        return (this.ipAdd);
+    }
+    getType(){
+        return (this.type);
     }
 }
 class Computer{
@@ -168,10 +170,10 @@ class Nmap {
     }
     //give the user more detailed information on network components
     nmapBasic(ip){
-        nmapTool.state = true;
+        this.state = true;
         let outputText = document.getElementById("toolOutput");
         outputText.innerHTML = "";
-        outputText.innerHTML = "All open ports.......\n\n\n";
+        outputText.innerHTML = "NMAP found the following open ports.......\n\n\n";
         for(let i=0; i<server.length; i++){
             if(ip == server[i].ipAdd){
                 outputText.innerHTML += "<li>" + JSON.stringify(server[i].ipAdd) + "  ---  Ports: " + JSON.stringify(server[i].port); + "</li>";
@@ -182,6 +184,15 @@ class Nmap {
     }
     nmapAP(){
         actionPoints.subAP(this.updateAP);
+    }
+    nmapFull(){
+        this.state = true;
+        let outputText = document.getElementById("toolOutput");
+        outputText.innerHTML = "";
+        outputText.innerHTML = "All open ports.......\n\n\n";
+        for(let i=0; i<server.length; i++){
+            outputText.innerHTML += "<li>" + JSON.stringify(server[i]); + "</li>";
+        }
     }
 }
 class Fping{
@@ -200,15 +211,34 @@ class Fping{
         }
     }
 }
+class Telnet{
+    constructor(name, state){
+        this.name = name;
+        this.state = state;
+    }
+    connection(ip){
+        this.state = true;
+        let outputText = document.getElementById("toolOutput");
+        outputText.innerHTML = "";
+        outputText.innerHTML = "<li>Trying " + ip + ".... </li>"
+        outputText.innerHTML += "<li>Connected to " + ip + ".... </li>";
+    }
+    smtpVerifySuccess(user){
+        let outputText = document.getElementById("toolOutput");
+        outputText.innerHTML += "<li>vrfy "+ user +"</li>"
+        outputText.innerHTML += "<li>252 2.0.0 "+ user +"</li>";
+    }
+    smptVerifyFailure(user){
+        let outputText = document.getElementById("toolOutput");
+        outputText.innerHTML += "<li>vrfy "+ user +"</li>"
+        outputText.innerHTML += "<li>550 5.1.1 <"+ user +">: Recipient address rejected: User unknownin local recipient table</li>";
+    }
+}
 
 
 
 
 
 
-/*
-getServerDetails(){
-    server.forEach(server => console.log(server));
-    for(let i=0; i<server.length; i++){
-        document.getElementById("testOutput").innerHTML = JSON.stringify(server, null, 2);
-*/
+
+
