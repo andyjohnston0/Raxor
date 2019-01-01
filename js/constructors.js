@@ -41,7 +41,7 @@ class Helper{
         outputText.innerHTML = "";
         outputText.innerHTML += "<li><h3>Penetration Testing Tools:</h3><li>"
         for(let i=0; i<tools.length; i++){
-            outputText.innerHTML += "<li>" + tools[i]; + "</li>";
+            outputText.innerHTML += "<li>" + tools[i] + "</li>";
         }
     }
     notesList(tool){
@@ -50,7 +50,7 @@ class Helper{
             outputText.innerHTML = "";
             outputText.innerHTML = "<li>fping found the following IP addressses:</li>"
             for(let i=0; i<completeIPstore.length; i++){
-                outputText.innerHTML += "<li>" + JSON.stringify(completeIPstore[i]); + "</li>";
+                outputText.innerHTML += "<li>" + JSON.stringify(completeIPstore[i]) + "</li>";
             }
         }
         else if(tool == 'nmap' && nmapTool.state === true){
@@ -58,7 +58,7 @@ class Helper{
             outputText.innerHTML = "";
             outputText.innerHTML = "All open ports.......\n\n\n";
             for(let i=0; i<server.length; i++){
-                outputText.innerHTML += "<li>" + JSON.stringify(server[i].ipAdd) + "  ---  Ports: " + JSON.stringify(server[i].port); + "</li>";
+                outputText.innerHTML += "<li>" + JSON.stringify(server[i].ipAdd) + "  ---  Ports: " + JSON.stringify(server[i].port) + "</li>";
             }
         }
         else {
@@ -176,7 +176,7 @@ class Nmap {
         outputText.innerHTML = "NMAP found the following open ports.......\n\n\n";
         for(let i=0; i<server.length; i++){
             if(ip == server[i].ipAdd){
-                outputText.innerHTML += "<li>" + JSON.stringify(server[i].ipAdd) + "  ---  Ports: " + JSON.stringify(server[i].port); + "</li>";
+                outputText.innerHTML += "<li>" + JSON.stringify(server[i].ipAdd) + "  ---  Ports: " + JSON.stringify(server[i].port) + "</li>";
             }
         }
         //update action points
@@ -191,7 +191,7 @@ class Nmap {
         outputText.innerHTML = "";
         outputText.innerHTML = "All open ports.......\n\n\n";
         for(let i=0; i<server.length; i++){
-            outputText.innerHTML += "<li>" + JSON.stringify(server[i]); + "</li>";
+            outputText.innerHTML += "<li>" + JSON.stringify(server[i]) + "</li>";
         }
     }
 }
@@ -207,7 +207,7 @@ class Fping{
         outputText.innerHTML = "";
         outputText.innerHTML = "<li>fping got responses from the following machines at:</li>"
         for(let i=0; i<completeIPstore.length; i++){
-            outputText.innerHTML += "<li>" + JSON.stringify(completeIPstore[i]); + "</li>";
+            outputText.innerHTML += "<li>" + JSON.stringify(completeIPstore[i]) + "</li>";
         }
     }
 }
