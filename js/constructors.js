@@ -69,47 +69,10 @@ class Helper{
         }
     }
 }
-//Feedback contains all methods that give the user feedback reponses.
-class Feedback{
+class FinalTests{
     constructor(){}
-    inputInvalid(){
-        let outputText = document.getElementById("testOutput");   
-        outputText.innerHTML = "";
-        outputText.innerHTML += "<li>Input not recognised.....<li>"
-                             + "<li></li>"
-                             + "<li>type 'help' for available commands</li>";
-    }
-}
-//ActionPoints class handles the game score and attributes
-class ActionPoints{
-    constructor(ap){
-        this.currentAP = ap;
-    }
-    getAP(){
-        return this.currentAP;
-    }
-    addAP(updateAP){
-        this.currentAP = this.currentAP + updateAP;
-    }
-    subAP(updateAP){
-        this.currentAP = this.currentAP - updateAP;
-        if(this.currentAP <= 0){
-            this.lostAP();
-        }
-    }
-    printAP(){
-        let outputText = document.getElementById("testOutput");   
-        outputText.innerHTML = "";
-        outputText.innerHTML += "<li>Remaining Action Points:<li>"
-                             + "<li>" + this.currentAP +  "</li>";
-    }
-    lostAP(){
-        let outputText = document.getElementById("testOutput");   
-        outputText.innerHTML = "";
-        outputText.innerHTML += "<li>.......access blocked<li>"
-                             + "<li>......tracing route</li>"
-                             + "<li>....knock knock</li>"
-                             + "<li>Game Over</li>";
+    finalTests(){
+            location.reload();
     }
 }
 //----------------------------------------Network component objects-----------------------------------------
@@ -179,11 +142,6 @@ class Nmap {
                 outputText.innerHTML += "<li>" + JSON.stringify(server[i].ipAdd) + "  ---  Ports: " + JSON.stringify(server[i].port) + "</li>";
             }
         }
-        //update action points
-        this.nmapAP();
-    }
-    nmapAP(){
-        actionPoints.subAP(this.updateAP);
     }
     nmapFull(){
         this.state = true;
@@ -227,6 +185,7 @@ class Telnet{
         let outputText = document.getElementById("toolOutput");
         outputText.innerHTML += "<li>vrfy "+ user +"</li>"
         outputText.innerHTML += "<li>252 2.0.0 "+ user +"</li>";
+        localStorage.setItem("scenario1Complete", "true");
     }
     smptVerifyFailure(user){
         let outputText = document.getElementById("toolOutput");

@@ -1,5 +1,4 @@
 //objectFactory contains all object creation functions
-//localStorage.setItem("scenario1", false)
 let server = [];
 let tools = [];
 let completeIPstore = [];
@@ -59,6 +58,7 @@ function serverGenerator(){
         //select a reasonable number of each server type
         types = randomItem(serverTypes);
         if (types === 'mail'){
+            mailTest = 1;
             var port = [25,23];
             serverTypes.splice(0,1);
         }
@@ -98,18 +98,19 @@ tools.push(telnetTool.name);
 tools.push("vrfy");
 //-----------------------------------------All other required objects---------------------------------------
 helper = new Helper();
-feedback = new Feedback();
-actionPoints = new ActionPoints(10);
-scenario1 = new Scenario1(0, true, false);
+scenario1 = new Scenario1(0);
+finalTest = new FinalTests();
 
 //-------------------------------------function that holds players achievemnet path in local memory and loads at start-------------------------
 function scenarioMemory(){
     appText = new AppText();
-    if(localStorage.getItem("scenario1") == false || localStorage.getItem("scenario1") == null){
-        appText.intro();
-        
+    if(localStorage.scenario1Complete == "false" || localStorage.scenario1Complete == null){
+        appText.intro();     
     }
     else{
+        localStorage.scenario1Active = "false";
         scenario1.scenarioTest();
     }
 }
+//-----------------------------------reload function------------------------------------
+

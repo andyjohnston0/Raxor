@@ -15,43 +15,41 @@ class AppText {
     }
 } 
 class Scenario1 {
-    constructor(scenarioPath, scenarioActive, scenarioState){
+    constructor(scenarioPath){
         this.scenarioPath = scenarioPath;
-        this.scenarioActive = scenarioActive;
-        this.scenarioState = scenarioState;
     }
     selector(){
-        if(this.scenarioPath === 0){
+        if(this.scenarioPath === 1){
             this.intro();
         }
-        else if(this.scenarioPath === 1){
+        else if(this.scenarioPath === 2){
             this.fPingIntro();
         }
-        else if(this.scenarioPath === 2){
+        else if(this.scenarioPath === 3){
             this.fPingUse();
         }
-        else if(this.scenarioPath === 3){
+        else if(this.scenarioPath === 4){
             this.ports();
         }
-        else if(this.scenarioPath === 4){
+        else if(this.scenarioPath === 5){
             this.nmapIntro();
         }
-        else if(this.scenarioPath === 5){
+        else if(this.scenarioPath === 6){
             this.nmapUse();
         }
-        else if(this.scenarioPath === 6){
+        else if(this.scenarioPath === 7){
             this.smtpMailIntro();
         }
-        else if(this.scenarioPath === 7){
+        else if(this.scenarioPath === 8){
             this.smtpTelnet();
         }
-        else if(this.scenarioPath === 8){
+        else if(this.scenarioPath === 9){
             this.smtpEmail();
         }
-        else if(this.scenarioPath === 9){
+        else if(this.scenarioPath === 10){
             this.scenarioComplete();
         }
-        else if(this.scenarioPath === 10){
+        else if(this.scenarioPath === 11){
             this.scenarioTest();
         }
         else{
@@ -78,33 +76,34 @@ class Scenario1 {
         return this.scenarioPath;
     }
     intro(){
-        this.scenarioPath = 0;
+        this.scenarioPath = 1;
+        localStorage.scenario1Active = "true";
         let outputText = document.getElementById("testOutput");
         outputText.innerHTML = "";
         outputText.innerHTML += "<li><H3><b>In this beginner scenario you will:</b></H3></li>"
                              +  "<li>- Gain access to the target network's mail server. Then verify and retrieve an email address to be used in a later attack.</li>"
                              +  "<li><H4><b>The steps:</b></H4></li>"
-                             +  "<li>1. Get the IP addresess of all responsive machines on the target network.</li>"
+                             +  "<li>1. Get the IP addresses of all responsive machines on the target network.</li>"
                              +  "<li>2. Scan these targets for open ports and services.</li>"
-                             +  "<li>3. Exploit any vulnerablities to access the target machine.</li>"
+                             +  "<li>3. Exploit any vulnerabilities to access the target machine.</li>"
                              +  "<li>4. Verify and retrieve an email address.</li>"
                              +  "<li>(Hint: Type <span id ='light'>'clear'</span> at any time to remove text from the terminal... try it now!)</li>"
                              +  "<li>Type <span id ='light'>'next'</span> to continue...</li>";                      
     }
     fPingIntro(){
-        this.scenarioPath = 1;
+        this.scenarioPath = 2;
         let outputText = document.getElementById("testOutput");
         outputText.innerHTML = "";
         outputText.innerHTML += "<li><H3><b>1. Get the IP addresses of live machines on the network:</b></H3></li>"
                              +  "<li>(Hint: Type <span id ='light'>'help'</span> at any time to show available commands... try it now!)</li>"
-                             +  "<li>A <b>ping</b> is a network packet called a Internet Control Message Protocol(ICMP) packet.</li>"
+                             +  "<li>A <b>ping</b> is a network packet called an Internet Control Message Protocol (ICMP) packet.</li>"
                              +  "<li>Sending  one of these <b>echo request packets</b> to a machine requires that machine to respond if it is alive and not restricted.</li>"
-                             +  "<li>Pinging each individual machine on a network is labourious. We can instead do a <b>ping sweep</b> to target all machines on a network at once.</li>"
+                             +  "<li>Pinging each individual machine on a network is laborious. We can instead do a <b>ping sweep</b> to target all machines on a network at once.</li>"
                              +  "<li>We will use a tool called <span id ='light'>Fping</span> to do this.</li>"
                              +  "<li>Type <span id ='light'>'next'</span> to continue.....</li>";   
     }
     fPingUse(){
-        this.scenarioPath = 2;
+        this.scenarioPath = 3;
         let outputText = document.getElementById("testOutput");
         outputText.innerHTML = "";
         outputText.innerHTML += "<li><H3><b>Using Fping to retrieve IP addresses</b></H3></li>"
@@ -122,7 +121,7 @@ class Scenario1 {
                              +  "<li>Type <span id ='light'>'next'</span> to continue.....</li>";
     } 
     ports(){
-        this.scenarioPath = 3;
+        this.scenarioPath = 4;
         let outputText = document.getElementById("testOutput");
         outputText.innerHTML = "";
         outputText.innerHTML += "<li><H3><b>2. Scan these targets for open ports and services</b></H3></li>"
@@ -135,7 +134,7 @@ class Scenario1 {
                              +  "<li>Type <span id ='light'>'next'</span> to continue.....</li>";                      
     }
     nmapIntro(){
-        this.scenarioPath = 4;
+        this.scenarioPath = 5;
         let outputText = document.getElementById("testOutput");
         outputText.innerHTML = "";
         outputText.innerHTML += "<li><H3><b>NMAP port scanner</b></H3></li>"
@@ -146,7 +145,7 @@ class Scenario1 {
                              +  "<li>Type <span id ='light'>'next'</span> to continue.....</li>";                      
     }
     nmapUse(){
-        this.scenarioPath = 5;
+        this.scenarioPath = 6;
         let outputText = document.getElementById("testOutput");
         outputText.innerHTML = "";
         outputText.innerHTML += "<li><H3><b>Using NMAP to find open ports</b></H3></li>"
@@ -154,16 +153,16 @@ class Scenario1 {
                              +  "<li>Type '<span id ='light'>nmap</span>' followed by the IP addresses you have found.</li>"
                              +  "<li>Example: nmap 123.234.12.121</li>"
                              +  "<li><H4><b>Outcome:</b></H4></li>"
-                             +  "<li>You should now see a a list of open ports on that machine. If you find the ports we are looking for. <span id ='light'>Note the IP address of that machine.</span></li>"
+                             +  "<li>You should now see a list of open ports on that machine. If you find the ports we are looking for. <span id ='light'>Note the IP address of that machine.</span></li>"
                              +  "<li>(Hint: Type '<span id ='light'>notes</span>' followed by the '<span id ='light'>tool name</span>' at any time to bring up a log of previous results you have discovered in this scenario so far.....</li>"
                              +  "<li>Example: <span id ='light'>notes fping</span> Try it now!)</li>"
                              +  "<li>Type <span id ='light'>'next'</span> when you are ready to continue.....</li>";
     }
     smtpMailIntro(){
-        this.scenarioPath = 6;
+        this.scenarioPath = 7;
         let outputText = document.getElementById("testOutput");
         outputText.innerHTML = "";
-        outputText.innerHTML += "<li><H3><b>3. Exploit any vulnerablities to access the target machine</b></H3></li>"
+        outputText.innerHTML += "<li><H3><b>3. Exploit any vulnerabilities to access the target machine</b></H3></li>"
                              +  "<li>If the mail server you have discovered has <span id ='light'>port 25</span> open you have discovered an <span id ='light'>SMTP server</span>.</li>"
                              +  "<li>SMTP stands for Simple Mail Transport Protocol and is a server-to-server protocol. Email clients use POP3 or IMAP protocols to communicate with SMTP servers.</li>"
                              +  "<li>SMTP servers use the SMTP protocol to communicate to other SMTP servers.</li>"
@@ -173,7 +172,7 @@ class Scenario1 {
 
     }
     smtpTelnet(){
-        this.scenarioPath = 7;
+        this.scenarioPath = 8;
         let outputText = document.getElementById("testOutput");
         outputText.innerHTML = "";
         outputText.innerHTML += "<li><H3><b>Connecting to the SMTP Server</b></H3></li>"
@@ -186,12 +185,12 @@ class Scenario1 {
                              +  "<li>Type <span id ='light'>'next'</span> when you are ready to continue.....</li>";
     }
     smtpEmail(){
-        this.scenarioPath = 8;
+        this.scenarioPath = 9;
         let outputText = document.getElementById("testOutput");
         outputText.innerHTML = "";
         outputText.innerHTML += "<li><H3><b>4. Verify and retrieve an email address</b></H3></li>"
-                             +  "<li>The SMTP protocol has it's own set of commands. You will will use the VRFY command to find an email address we can use later.</li>"
-                             +  "<li>The <span id ='light'>VRFY</span> (verify) command asks the server to verify if a email user's mailbox exists.</li>"
+                             +  "<li>The SMTP protocol has its' own set of commands. You will use the VRFY command to find an email address we can use later.</li>"
+                             +  "<li>The <span id ='light'>VRFY</span> (verify) command asks the server to verify if a user's mailbox exists.</li>"
                              +  "<li><H4><b>Try to verify a mailbox for one of the following:</b></H4></li>"
                              +  "<li>1. '<span id ='light'>"+ mailBoxes[0] +"</span>'</li>"
                              +  "<li>2. '<span id ='light'>"+ mailBoxes[1] +"</span>'</li>"
@@ -202,26 +201,16 @@ class Scenario1 {
                              +  "<li>Type <span id ='light'>'next'</span> when you are ready to continue.....</li>";
     }
     scenarioComplete(){
-        this.scenarioPath = 9;
         let outputText = document.getElementById("testOutput");
         outputText.innerHTML = "";
         outputText.innerHTML += "<li><H3><b>Congratulations! You have completed your Introductory Scenario.</b></H3></li>"
                              +  "<li><H4><b>The steps you completed:</b></H4></li>"
-                             +  "<li>1. Get the IP addresess of all responsive machines on the target network.</li>"
+                             +  "<li>1. Get the IP addreses of all responsive machines on the target network.</li>"
                              +  "<li>2. Scan these targets for open ports and services.</li>"
-                             +  "<li>3. Exploit any vulnerablities to access the target machine.</li>"
+                             +  "<li>3. Exploit any vulnerabilities to access the target machine.</li>"
                              +  "<li>4. Verify and retrieve an email address.</li>"
                              +  "<li><span id ='light'>You now should be able to use the tools and methods you have learned to complete a similar scenario on your own!</span></li>"
                              +  "<li>Type <span id ='light'>'start'</span> when you are ready to begin.....</li>";
-    }
-    scenarioTestSet(){
-        this.scenarioPath = 10;
-        if(localStorage.getItem("scenario1") == true){
-            location.reload();
-        }
-        else{
-            this.back();
-        }
     }
     scenarioTest(){
         let outputText = document.getElementById("testOutput");
@@ -233,6 +222,7 @@ class Scenario1 {
                              +  "<li>3. Exploit any vulnerablities to access the target machine.</li>"
                              +  "<li>4. Verify and retrieve an email address.</li>"
                              +  "<li><span id ='light'>Remember all the available commands you can access through the 'help' menu.</span></li>"
+                             +  "<li>Hint: We know the first part of the subnet range to be <span id ='light'>" + randSub1 + "." + randSub2 +"</span></li>"
                              +  "<li>Test network environment has been initialised......begin.....</li>";
     }
 }
