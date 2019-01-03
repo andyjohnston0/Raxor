@@ -93,6 +93,7 @@ var customCommands = {
         let input = ARGV['_'];
         try{
           for(let i =0; i<= scenarioMail.length; i++){
+            //Check if user input IP matches correct server IP address + sceanrio1 is active at this time
             if(input == scenarioMail[i] && localStorage.scenario1Active === "true"){
               scenario1.scenarioComplete();
               telnetTool.smtpVerifySuccess(input);

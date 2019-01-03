@@ -1,7 +1,5 @@
 // Here are constructors for all objects
 
-//This array stores all IP addresses of Network compeonents created
-completeIPstore = [];
 //this array stores the range of IP addresses
 //alert(ipRange);
 //This array stores the list of port numbers and their associated services
